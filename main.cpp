@@ -68,9 +68,48 @@ public:
     //Sort function
     void sort(string criteria)
     {
-        book.author = "";
-        book.name = "";
-        book.id = 0;
+        Book books[9999];
+        int counter = 0;;
+
+        for (int i = 0; i < size; i++)
+          {
+          for (list<Book>::iterator it = map[i].begin(); it != map[i].end(); it++)
+            {
+            if (counter < 9999)
+              {
+              books[counter++] = *it;
+              }
+            }
+          }
+          for (int i = 0; i < counter - 1; i++)
+            {
+            for (int j = 0; j < counter - i - 1; j++)
+              {
+              bool swapCondition = false;
+              if (criteria == "name" && books[j].name > books[j + 1].name)
+              {
+                    swapCondition = true;
+              }
+              else if (criteria == "author" && books[j].author > books[j + 1].author)
+              {
+                    swapCondition = true;
+              }
+              else if (criteria == "id" && books[j].id > books[j + 1].id)
+              {
+                    swapCondition = true;
+              }
+              if (swapCondition == true)
+                {
+                Book temp = books[j];
+                books[j] = books[j + 1];
+                books[j + 1] = temp;
+                }
+            }
+          }
+          for (int i = 0; i < counter; i++)
+            {
+              cout << "Name: " << books[i].name << "\nAuthor: " << books[i].author << "\nID: " << books[i].id << endl;
+            }
     }
 
     //Find function
