@@ -145,14 +145,66 @@ public:
 //Main
 int main()
 {
-    /*
-    Menu:
-    1)  Add book
-    2)  Remove book
-    3)  Sort book -> (By name, author, id)
-    4)  Find book
-    5)  Display book
-    6) Exit
-    */
+  HashMap HashMap(10);
+  int choice;
+    while (true)
+    {
+        cout << "\nMenu:\n";
+        cout << "1) Add book\n";
+        cout << "2) Remove book\n";
+        cout << "3) Sort books (by name, author, id)\n";
+        cout << "4) Find book\n";
+        cout << "5) Display all books\n";
+        cout << "6) Exit\n";
+        cout << "Enter choice: ";
+        cin >> choice;
+
+        if (choice == 1)
+        {
+            Book book;
+            cout << "Enter book name: ";
+            cin.ignore();
+            getline(cin, book.name);
+            cout << "Enter author name: ";
+            getline(cin, book.author);
+            cout << "Enter book ID: ";
+            cin >> book.id;
+            HashMap.add(book);
+        }
+        else if (choice == 2)
+        {
+            int id;
+            cout << "Enter book ID to remove: ";
+            cin >> id;
+            HashMap.remove(id);
+        }
+        else if (choice == 3)
+        {
+            string criteria;
+            cout << "Enter sort criteria (name, author, id): ";
+            cin >> criteria;
+            HashMap.sort(criteria);
+        }
+        else if (choice == 4)
+        {
+            int id;
+            cout << "Enter book ID to find: ";
+            cin >> id;
+            HashMap.find(id);
+        }
+        else if (choice == 5)
+        {
+            HashMap.display();
+        }
+        else if (choice == 6)
+        {
+            break;
+        }
+        else
+        {
+            cout << "Choose a valid option.\n";
+        }
+    }
+
     return 0;
 }
