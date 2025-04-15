@@ -52,9 +52,17 @@ public:
     //Remove function
     void remove(int id)
     {
-        book.author = "";
-        book.name = "";
-        book.id = 0;
+        int index = hashFunction(id);
+        for (list<Book>::iterator i = map[index].begin(); i != map[index].end(); i++)
+        {
+         if (i->id == id)
+           {
+           map[index].erase(i);
+           cout << "Book removed with ID " << id << " ." << endl;
+           return;
+           }
+        }
+        cout << "Book doesn't exist within the library." << endl;
     }
 
     //Sort function
