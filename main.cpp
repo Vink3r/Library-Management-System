@@ -131,9 +131,14 @@ public:
     //Display function
     void display()
     {
-        book.author = "";
-        book.name = "";
-        book.id = 0;
+      cout << "\nAll books in the library system:\n";
+        for (int i = 0; i < size; ++i)
+      {
+            for (list<Book>::iterator it = map[i].begin(); it != map[i].end(); ++it)
+              {
+                cout << "Name: " << it->name << "\nAuthor: " << it->author << "\nID: " << it->id << endl;
+              }
+      }
     }
 };
 
