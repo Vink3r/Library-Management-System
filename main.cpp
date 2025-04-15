@@ -43,6 +43,7 @@ public:
         map = new list<Book>[size];
     }
 
+    //Add function
     void add(Book book)
     {
       int index = hashFunction(book.id);
@@ -81,6 +82,7 @@ public:
               }
             }
           }
+          //Bubble sort
           for (int i = 0; i < counter - 1; i++)
             {
             for (int j = 0; j < counter - i - 1; j++)
@@ -106,9 +108,10 @@ public:
                 }
             }
           }
+          //Display after sort
           for (int i = 0; i < counter; i++)
             {
-              cout << "Name: " << books[i].name << "\nAuthor: " << books[i].author << "\nID: " << books[i].id << endl;
+              cout << "Name: " << books[i].name << "\nAuthor: " << books[i].author << "\nID: " << books[i].id << "\n" << endl;
             }
     }
 
@@ -136,17 +139,30 @@ public:
       {
             for (list<Book>::iterator it = map[i].begin(); it != map[i].end(); ++it)
               {
-                cout << "Name: " << it->name << "\nAuthor: " << it->author << "\nID: " << it->id << endl;
+                cout << "Name: " << it->name << "\nAuthor: " << it->author << "\nID: " << it->id << "\n" << endl;
               }
       }
+    }
+
+    //Fill 3 books in library
+    void fill()
+    {
+      Book book1 = {"The Great Gatsby", "F. Scott Fitzgerald", 45565};
+      Book book2 = {"1984", "George Orwell", 31834};
+      Book book3 = {"To Kill a Mockingbird", "Harper Lee", 91045};
+      add(book1);
+      add(book2);
+      add(book3);
     }
 };
 
 //Main
 int main()
 {
-  HashMap HashMap(10);
+  HashMap HashMap(20);
+  HashMap.fill();     //Fill 3 books to demonstrate, can be disable
   int choice;
+  //Main menu
     while (true)
     {
         cout << "\nMenu:\n";
