@@ -115,9 +115,17 @@ public:
     //Find function
     void find(int id)
     {
-        book.author = "";
-        book.name = "";
-        book.id = 0;
+        int index = hashFunction(id);
+        for (list<Book>::iterator i = map[index].begin(); i != map[index].end(); ++i)
+        {
+            if (i->id == id)
+          {
+                cout << "Book found within library:\n";
+                cout << "Name: " << i->name << "\nAuthor: " << i->author << "\nID: " << i->id << endl;
+                return;
+          }
+        }
+        cout << "Book not found within library.\n";
     }
 
     //Display function
