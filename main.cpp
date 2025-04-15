@@ -50,7 +50,7 @@ public:
     }
 
     //Remove function
-    void remove(Book book)
+    void remove(int id)
     {
         book.author = "";
         book.name = "";
