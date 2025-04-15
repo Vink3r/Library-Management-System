@@ -43,6 +43,12 @@ public:
         map = new list<Book>[size];
     }
 
+    void add(Book book)
+    {
+      int index = hashFunction(book.id);
+      map[index].push_back(book);
+    }
+
     //Remove function
     void remove(Book book)
     {
