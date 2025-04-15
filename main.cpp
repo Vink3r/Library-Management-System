@@ -66,7 +66,7 @@ public:
     }
 
     //Sort function
-    void sort(Book book)
+    void sort(string criteria)
     {
         book.author = "";
         book.name = "";
