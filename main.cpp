@@ -113,7 +113,7 @@ public:
     }
 
     //Find function
-    void find(Book book)
+    void find(int id)
     {
         book.author = "";
         book.name = "";
