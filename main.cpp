@@ -129,7 +129,7 @@ public:
     }
 
     //Display function
-    void display(Book book)
+    void display()
     {
         book.author = "";
         book.name = "";
