@@ -54,7 +54,7 @@ public:
     }
 
     // Remove book by ID only
-    void remove(int id) {
+    void removeId(int id) {
         int index = hashFunction(id); // searches for book at index
         for (list<Book>::iterator i = map[index].begin(); i != map[index].end(); i++) {
             if (i->id == id) // if the id within the index matches the given book id
@@ -69,7 +69,7 @@ public:
     }
 
     // Removes a book by name or by author
-    void stringRemove(string name, string type) {
+    void removeString(string name, string type) {
         for (int i = 0; i < size; i++) {
             // traverses hashtable
 
@@ -141,7 +141,7 @@ public:
     }
 
     // Find book by ID only
-    void find(int id) {
+    void findId(int id) {
         int index = hashFunction(id); // maps given id to index on the hash table
         for (list<Book>::iterator i = map[index].begin(); i != map[index].end(); ++i) {
             // traverses linked list at given index
@@ -157,7 +157,7 @@ public:
     }
 
     // search for a book by name or author
-    void search(string name, string type) {
+    void findString(string name, string type) {
         for (int i = 0; i < size; i++) {
             // traverses hash table
 
@@ -221,120 +221,155 @@ int main() {
 
 //-------------------------------------------------------------------------------------------------
 
-        if (choice == 1) {
-            // add a book
-            Book book;
-            cout << "Enter book name: ";
-            cin.ignore();
-            getline(cin, book.name);
-            cout << "Enter author name: ";
-            getline(cin, book.author);
-            cout << "Enter book ID: ";
-            cin >> book.id;
-            HashMap.add(book);
-//-------------------------------------------------------------------------------------------------
-
-        } else if (choice == 2) {
-            // remove a book
-            // initialize variables
-            Book book;
-            int option;
-            int bookId;
-            string bookName;
-            string bookAuthor;
-
-            cout << "Remove book by (Please choose corresponding number option): " << std::endl;
-            cout << "[1] Book Name " << endl;
-            cout << "[2] Book Author " << endl;
-            cout << "[3] Book ID " << endl;
-            cout << "[4] Back to Main Menu " << endl;
-            cin >> option;
-            cin.ignore();
-
-            if (option == 1) {
-                // remove by name
-                cout << "Enter the name of the book you wish to remove: " << endl;
-                cin >> bookName;
-                HashMap.stringRemove("name", bookName);
-            } else if (option == 2) {
-                // remove by author
-                cout << "Enter the author of the book you wish to remove: " << endl;
-                getline(cin, bookAuthor);
-                HashMap.stringRemove("author", bookAuthor);
-            } else if (option == 3) {
-                // remove by ID
-                cout << "Enter the ID of the book you wish to remove: " << endl;
-                cin >> bookId;
-                HashMap.remove(bookId);
-            } else if (option == 4) {
-                // go back to main menu
-                continue;
+        switch (choice) {
+            // Add a book
+            case 1:
+            {
+                Book book;
+                cout << "Enter book name: ";
+                cin.ignore();
+                getline(cin, book.name);
+                cout << "Enter author name: ";
+                getline(cin, book.author);
+                cout << "Enter book ID: ";
+                cin >> book.id;
+                HashMap.add(book);
+                break;
             }
-//------------------------------------------------------------------------------------------------
+            // Remove a book
+            case 2:
+            {
+                // initialize variables
+                Book book;
+                int option;
+                int bookId;
+                string bookName;
+                string bookAuthor;
 
-        } else if (choice == 3) {
+                cout << "Remove book by (Please choose corresponding number option): " << std::endl;
+                cout << "[1] Book Name " << endl;
+                cout << "[2] Book Author " << endl;
+                cout << "[3] Book ID " << endl;
+                cout << "[4] Back to Main Menu " << endl;
+                cin >> option;
+                cin.ignore();
+
+                switch (option) {
+                    // Remove by name
+                    case 1:
+                    {
+                        cout << "Enter the name of the book you wish to remove: " << endl;
+                        cin >> bookName;
+                        HashMap.removeString("name", bookName);
+                        break;
+                    }
+                    // Remove by author
+                    case 2:
+                    {
+                        cout << "Enter the author of the book you wish to remove: " << endl;
+                        getline(cin, bookAuthor);
+                        HashMap.removeString("author", bookAuthor);
+                        break;
+                    }
+                    // Remove by ID
+                    case 3:
+                    {
+                        cout << "Enter the ID of the book you wish to remove: " << endl;
+                        cin >> bookId;
+                        HashMap.removeId(bookId);
+                        break;
+                    }
+                    // Go back
+                    case 4:
+                    {
+                        continue;
+                    }
+                    default:
+                    {
+                        cout << "\nInvalid input, try again!" << endl;
+                    }
+                }
+                break;
+            }
             // Sort books (bubble sort)
-            string criteria;
-            cout << "Enter sort criteria (name, author, id): ";
-            cin >> criteria;
-            HashMap.sort(criteria);
-//-------------------------------------------------------------------------------------------------
-
-        } else if (choice == 4) {
-            // search for a book
-            // initialize variables
-            Book book;
-            int option2;
-            int bookId;
-            string bookName;
-            string bookAuthor;
-
-            cout << "Choose search method by typing in the corresponding number choice: " << std::endl;
-            cout << "[1] Book Name " << endl;
-            cout << "[2] Book Author " << endl;
-            cout << "[3] Book ID " << endl;
-            cout << "[4] Back to Main Menu " << endl;
-            cin >> option2;
-            cin.ignore();
-
-            // option result branches
-            if (option2 == 1) {
-                // search by book name
-                cout << "Enter book name: " << endl;
-                cin >> bookName;
-                HashMap.search("name", bookName);
-            } else if (option2 == 2) {
-                // search by book author
-                cout << "Enter book author: " << endl;
-                getline(cin, bookAuthor);
-                HashMap.search("author", bookAuthor);
-            } else if (option2 == 3) {
-                // search by book ID
-                cout << "Enter book ID: " << endl;
-                cin >> bookId;
-                HashMap.find(bookId);
-            } else if (option2 == 4) {
-                // returns to main menu
-                continue;
-            } else {
-                // no valid option chosen
-                cout << "Invalid choice." << endl;
+            case 3:
+            {
+                string criteria;
+                cout << "Enter sort criteria (name, author, id): ";
+                cin >> criteria;
+                HashMap.sort(criteria);
+                break;
             }
-//------------------------------------------------------------------------------------------------
+            // Search for a book
+            case 4:
+            {
+                // initialize variables
+                Book book;
+                int option2;
+                int bookId;
+                string bookName;
+                string bookAuthor;
 
-        } else if (choice == 5) {
-            // displays library
-            HashMap.display();
-//-------------------------------------------------------------------------------------------------
+                cout << "Choose search method by typing in the corresponding number choice: " << std::endl;
+                cout << "[1] Book Name " << endl;
+                cout << "[2] Book Author " << endl;
+                cout << "[3] Book ID " << endl;
+                cout << "[4] Back to Main Menu " << endl;
+                cin >> option2;
+                cin.ignore();
 
-        } else if (choice == 6) {
-            // exits program
-            return 0;
-//-------------------------------------------------------------------------------------------------
-
-        } else {
-            // invalid input
-            cout << "Choose a valid option.\n";
+                switch (option2) {
+                    // Search by name
+                    case 1:
+                    {
+                        cout << "Enter book name: " << endl;
+                        cin >> bookName;
+                        HashMap.findString("name", bookName);
+                        break;
+                    }
+                    // Search by author
+                    case 2:
+                    {
+                        cout << "Enter book author: " << endl;
+                        getline(cin, bookAuthor);
+                        HashMap.findString("author", bookAuthor);
+                        break;
+                    }
+                    // Search by ID
+                    case 3:
+                    {
+                        cout << "Enter book ID: " << endl;
+                        cin >> bookId;
+                        HashMap.findId(bookId);                        
+                        break;
+                    }
+                    // Go back
+                    case 4:
+                    {
+                        continue;
+                    }
+                    default:
+                    {
+                        cout << "\nInvalid input, try again!" << endl;
+                    }
+                }
+                break;
+            }
+            // Display library
+            case 5:
+            {
+                HashMap.display();
+                break;
+            }
+            // Exit program
+            case 6:
+            {
+                return 0;
+            }
+            default:
+            {
+                cout << "\nInvalid input, try again!" << endl;
+            }
         }
     }
 }
